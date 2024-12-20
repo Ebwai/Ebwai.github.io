@@ -23,11 +23,11 @@
     
     
     <entry>
-      <title>近期AI的应用领域</title>
-      <link href="/2024/12/08/%E8%BF%91%E6%9C%9FAI%E7%9A%84%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F/"/>
-      <url>/2024/12/08/%E8%BF%91%E6%9C%9FAI%E7%9A%84%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F/</url>
+      <title>近期的AI发展路线</title>
+      <link href="/2024/12/08/%E8%BF%91%E6%9C%9F%E7%9A%84AI%E7%83%AD%E9%97%A8%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91/"/>
+      <url>/2024/12/08/%E8%BF%91%E6%9C%9F%E7%9A%84AI%E7%83%AD%E9%97%A8%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91/</url>
       
-        <content type="html"><![CDATA[<h2 id="数据的获取与处理："><a href="#数据的获取与处理：" class="headerlink" title="数据的获取与处理："></a>数据的获取与处理：</h2><p>爬虫获取数据+让AI去试图去分析我们想要知道的结果</p><h2 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h2><ul><li>思路一：拆分成变量较少的不同段，比如预测票房，可以区分成季节的，工作日和休息日的，白天的，晚上的，再把所有模型给统一</li><li>思路二：结合趋势</li></ul><h2 id="AI最近在行业中的应用"><a href="#AI最近在行业中的应用" class="headerlink" title="AI最近在行业中的应用"></a>AI最近在行业中的应用</h2><p>!(&#x2F;img&#x2F;articles&#x2F;AI最近在行业中的应用&#x2F;1.jpg)<br>!(&#x2F;img&#x2F;articles&#x2F;AI最近在行业中的应用&#x2F;2.jpg)</p>]]></content>
+        <content type="html"><![CDATA[<hr><p>近期总的趋势：从小模型（判别型）–&gt;大模型（生成型）</p><hr><h2 id="1-生成式AI："><a href="#1-生成式AI：" class="headerlink" title="1.生成式AI："></a>1.生成式AI：</h2><p>语言交互【可以产生新文本】（记忆只有一段，无法处理复杂逻辑）</p><h2 id="2-智能体："><a href="#2-智能体：" class="headerlink" title="2.智能体："></a>2.智能体：</h2><p>语言交互【能在特定环境感知并采取行动】（通过拆分工作逻辑，工作流，任务划分后交给专门的AI）</p><ul><li>引入工具：</li><li>引入数据库【数据从哪来：具体工作中出现的细节点结构化数据，比如产线订单的调度，蓝领人员的管理，这些以前都是有管理层商议决定，那么这些数据就可以用来让AI学习，人在其中做的就是将数据结构化并整理出业务逻辑】（为什么不用excel输入，因为假如设定一个接口，那么就数据库是实时更新的，且AI可自动调用，不需要每次人工手动输入）<ul><li><input disabled="" type="checkbox"> 需要查询如何将数据最有效的传递给AI</li></ul></li><li>引入逻辑【决策能力】</li><li>上下文记忆能力</li><li>打分反馈学习能力，多个AI直接相互评估</li></ul><h2 id="3-多模态"><a href="#3-多模态" class="headerlink" title="3.多模态"></a>3.多模态</h2><h2 id="4-多智能体MAS：群体智能"><a href="#4-多智能体MAS：群体智能" class="headerlink" title="4.多智能体MAS：群体智能"></a>4.多智能体MAS：群体智能</h2>]]></content>
       
       
       <categories>
@@ -42,11 +42,11 @@
     
     
     <entry>
-      <title>近期的AI发展路线</title>
-      <link href="/2024/12/08/%E8%BF%91%E6%9C%9F%E7%9A%84AI%E7%83%AD%E9%97%A8%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91/"/>
-      <url>/2024/12/08/%E8%BF%91%E6%9C%9F%E7%9A%84AI%E7%83%AD%E9%97%A8%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91/</url>
+      <title>近期AI的应用领域</title>
+      <link href="/2024/12/08/%E8%BF%91%E6%9C%9FAI%E7%9A%84%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F/"/>
+      <url>/2024/12/08/%E8%BF%91%E6%9C%9FAI%E7%9A%84%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F/</url>
       
-        <content type="html"><![CDATA[<hr><p>近期总的趋势：从小模型（判别型）–&gt;大模型（生成型）</p><hr><h2 id="1-生成式AI："><a href="#1-生成式AI：" class="headerlink" title="1.生成式AI："></a>1.生成式AI：</h2><p>语言交互【可以产生新文本】（记忆只有一段，无法处理复杂逻辑）</p><h2 id="2-智能体："><a href="#2-智能体：" class="headerlink" title="2.智能体："></a>2.智能体：</h2><p>语言交互【能在特定环境感知并采取行动】（通过拆分工作逻辑，工作流，任务划分后交给专门的AI）</p><ul><li>引入工具：</li><li>引入数据库【数据从哪来：具体工作中出现的细节点结构化数据，比如产线订单的调度，蓝领人员的管理，这些以前都是有管理层商议决定，那么这些数据就可以用来让AI学习，人在其中做的就是将数据结构化并整理出业务逻辑】（为什么不用excel输入，因为假如设定一个接口，那么就数据库是实时更新的，且AI可自动调用，不需要每次人工手动输入）<ul><li><input disabled="" type="checkbox"> 需要查询如何将数据最有效的传递给AI</li></ul></li><li>引入逻辑【决策能力】</li><li>上下文记忆能力</li><li>打分反馈学习能力，多个AI直接相互评估</li></ul><h2 id="3-多模态"><a href="#3-多模态" class="headerlink" title="3.多模态"></a>3.多模态</h2><h2 id="4-多智能体MAS：群体智能"><a href="#4-多智能体MAS：群体智能" class="headerlink" title="4.多智能体MAS：群体智能"></a>4.多智能体MAS：群体智能</h2>]]></content>
+        <content type="html"><![CDATA[<h2 id="数据的获取与处理："><a href="#数据的获取与处理：" class="headerlink" title="数据的获取与处理："></a>数据的获取与处理：</h2><p>爬虫获取数据+让AI去试图去分析我们想要知道的结果</p><h2 id="预测"><a href="#预测" class="headerlink" title="预测"></a>预测</h2><ul><li>思路一：拆分成变量较少的不同段，比如预测票房，可以区分成季节的，工作日和休息日的，白天的，晚上的，再把所有模型给统一</li><li>思路二：结合趋势</li></ul><h2 id="AI最近在行业中的应用"><a href="#AI最近在行业中的应用" class="headerlink" title="AI最近在行业中的应用"></a>AI最近在行业中的应用</h2><p>!(&#x2F;img&#x2F;articles&#x2F;AI最近在行业中的应用&#x2F;1.jpg)<br>!(&#x2F;img&#x2F;articles&#x2F;AI最近在行业中的应用&#x2F;2.jpg)</p>]]></content>
       
       
       <categories>
