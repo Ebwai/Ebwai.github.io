@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>拉普拉斯变换 | Tony</title><meta name="author" content="梁沛志"><meta name="copyright" content="梁沛志"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="title: 信号系统-拉普拉斯变换date: 2024-12-08categories: 控制description: 信号系统理论笔记-拉普拉斯变换适用场景线性时不变系统模型（常系数线性微分方程）变换公式来源：为了满足傅里叶中的绝对可积条件，在原始的傅里叶变换引入衰减因子，也就是式子的2端同乘 $e^{-\sigma t}$，从而由频域变为 $s &#x3D; \sigma + j\omeg">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拉普拉斯变换">
+<meta property="og:url" content="http://example.com/2025/02/17/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2/index.html">
+<meta property="og:site_name" content="Tony">
+<meta property="og:description" content="title: 信号系统-拉普拉斯变换date: 2024-12-08categories: 控制description: 信号系统理论笔记-拉普拉斯变换适用场景线性时不变系统模型（常系数线性微分方程）变换公式来源：为了满足傅里叶中的绝对可积条件，在原始的傅里叶变换引入衰减因子，也就是式子的2端同乘 $e^{-\sigma t}$，从而由频域变为 $s &#x3D; \sigma + j\omeg">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/home/article1.png">
+<meta property="article:published_time" content="2025-02-16T16:25:20.000Z">
+<meta property="article:modified_time" content="2025-02-16T16:25:20.040Z">
+<meta property="article:author" content="梁沛志">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/home/article1.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/02/17/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 8 || hour >= 22
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '拉普拉斯变换',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/home/home1.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar/1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/home/article1.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/home/home1.jpg" alt="Logo"><span class="site-name">Tony</span></a><a class="nav-page-title" href="/"><span class="site-name">拉普拉斯变换</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">拉普拉斯变换</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-16T16:25:20.000Z" title="发表于 2025-02-17 00:25:20">2025-02-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-16T16:25:20.040Z" title="更新于 2025-02-17 00:25:20">2025-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F/">信号系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><hr>
+<h2 id="title-信号系统-拉普拉斯变换date-2024-12-08categories-控制description-信号系统理论笔记-拉普拉斯变换"><a href="#title-信号系统-拉普拉斯变换date-2024-12-08categories-控制description-信号系统理论笔记-拉普拉斯变换" class="headerlink" title="title: 信号系统-拉普拉斯变换date: 2024-12-08categories: 控制description: 信号系统理论笔记-拉普拉斯变换"></a>title: 信号系统-拉普拉斯变换<br>date: 2024-12-08<br>categories: 控制<br>description: 信号系统理论笔记-拉普拉斯变换</h2><h1 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h1><h2 id="线性时不变系统模型（常系数线性微分方程）"><a href="#线性时不变系统模型（常系数线性微分方程）" class="headerlink" title="线性时不变系统模型（常系数线性微分方程）"></a>线性时不变系统模型（常系数线性微分方程）</h2><h1 id="变换公式"><a href="#变换公式" class="headerlink" title="变换公式"></a>变换公式</h1><h2 id="来源："><a href="#来源：" class="headerlink" title="来源："></a>来源：</h2><p>为了满足傅里叶中的绝对可积条件，在原始的傅里叶变换引入衰减因子，<br>也就是式子的2端同乘 $e^{-\sigma t}$，<br>从而由频域变为 $s &#x3D; \sigma + j\omega$，既描述了频率，也描述了频率变化的快慢。</p>
+<h3 id="收敛条件：不收敛就不能拉氏变换"><a href="#收敛条件：不收敛就不能拉氏变换" class="headerlink" title="收敛条件：不收敛就不能拉氏变换"></a>收敛条件：不收敛就不能拉氏变换</h3><p>当原来在时域 $t$ 的变化也为指数时，两个指数相乘的结果必须幂次依然 $&lt; 0$ 才行。</p>
+<h2 id="公式："><a href="#公式：" class="headerlink" title="公式："></a>公式：</h2><h3 id="1-正变换"><a href="#1-正变换" class="headerlink" title="1. 正变换"></a>1. 正变换</h3><p>$$<br>F(s) &#x3D; \int_0^\infty f(t) e^{-st} , dt<br>$$</p>
+<h3 id="2-逆变换"><a href="#2-逆变换" class="headerlink" title="2. 逆变换"></a>2. 逆变换</h3><p>$$<br>f(t) &#x3D; \frac{1}{2\pi j} \int_{\sigma - j\infty}^{\sigma + j\infty} F(s) e^{st} , ds<br>$$</p>
+<h3 id="3-常见结论（只考虑单边，所以-t-0-时一律为0，定义从0开始【所以包括了跳变点】）"><a href="#3-常见结论（只考虑单边，所以-t-0-时一律为0，定义从0开始【所以包括了跳变点】）" class="headerlink" title="3. 常见结论（只考虑单边，所以 $t &lt; 0$ 时一律为0，定义从0开始【所以包括了跳变点】）"></a>3. 常见结论（只考虑单边，所以 $t &lt; 0$ 时一律为0，定义从0开始【所以包括了跳变点】）</h3><p>$$<br>\delta’(t) \xrightarrow{s}<br>$$<br>$$<br>\delta(t) \xrightarrow{1}<br>$$<br>$$<br>u(t) \xrightarrow{\frac{1}{s}}<br>$$<br>$$<br>t^n \xrightarrow{\frac{n!}{s^{n+1}}}<br>$$<br>$$<br>e^{-at} \xrightarrow{\frac{1}{s+a}}<br>$$<br>$$<br>\cos(\omega t) \xrightarrow{\frac{s}{s^2 + \omega^2}}<br>$$<br>$$<br>\sin(\omega t) \xrightarrow{\frac{\omega}{s^2 + \omega^2}}<br>$$<br>以及各种组合形式。</p>
+<h1 id="优点：【时域的运算变得简单】"><a href="#优点：【时域的运算变得简单】" class="headerlink" title="优点：【时域的运算变得简单】"></a>优点：【时域的运算变得简单】</h1><h2 id="1-线性：-K-1-f-1-t-K-2-f-2-t-xrightarrow-K-1-f-1-s-K-2-f-2-s"><a href="#1-线性：-K-1-f-1-t-K-2-f-2-t-xrightarrow-K-1-f-1-s-K-2-f-2-s" class="headerlink" title="1. 线性：$K_1 f_1(t) + K_2 f_2(t) \xrightarrow{K_1 f_1(s) + K_2 f_2(s)}$"></a>1. 线性：$K_1 f_1(t) + K_2 f_2(t) \xrightarrow{K_1 f_1(s) + K_2 f_2(s)}$</h2><h2 id="2-微分："><a href="#2-微分：" class="headerlink" title="2. 微分："></a>2. 微分：</h2><h3 id="时域-xrightarrow-frac-d-dt-s-域：-frac-f-t-dt-xrightarrow-s-F-s-f-0"><a href="#时域-xrightarrow-frac-d-dt-s-域：-frac-f-t-dt-xrightarrow-s-F-s-f-0" class="headerlink" title="时域 $\xrightarrow{\frac{d}{dt}}$ s 域：$\frac{f(t)}{dt} \xrightarrow{s F(s) - f(0)}$"></a>时域 $\xrightarrow{\frac{d}{dt}}$ s 域：$\frac{f(t)}{dt} \xrightarrow{s F(s) - f(0)}$</h3><h3 id="s-域-xrightarrow-frac-d-ds-时域：-frac-F-s-ds-xrightarrow-t-f-t"><a href="#s-域-xrightarrow-frac-d-ds-时域：-frac-F-s-ds-xrightarrow-t-f-t" class="headerlink" title="s 域 $\xrightarrow{\frac{d}{ds}}$ 时域：$\frac{F(s)}{ds} \xrightarrow{-t f(t)}$"></a>s 域 $\xrightarrow{\frac{d}{ds}}$ 时域：$\frac{F(s)}{ds} \xrightarrow{-t f(t)}$</h3><h2 id="3-积分："><a href="#3-积分：" class="headerlink" title="3. 积分："></a>3. 积分：</h2><h3 id="时域-xrightarrow-int-infty-t-s-域：-int-infty-t-f-gamma-d-gamma-xrightarrow-frac-F-s-s-frac-f-1-0-s"><a href="#时域-xrightarrow-int-infty-t-s-域：-int-infty-t-f-gamma-d-gamma-xrightarrow-frac-F-s-s-frac-f-1-0-s" class="headerlink" title="时域 $\xrightarrow{\int_{-\infty}^t}$ s 域：$\int_{-\infty}^t f(\gamma) d\gamma \xrightarrow{\frac{F(s)}{s} + \frac{f^{-1}(0)}{s}}$"></a>时域 $\xrightarrow{\int_{-\infty}^t}$ s 域：$\int_{-\infty}^t f(\gamma) d\gamma \xrightarrow{\frac{F(s)}{s} + \frac{f^{-1}(0)}{s}}$</h3><p>其中 $\frac{f^{-1}(0)}{s} &#x3D; \int_{-\infty}^0 f(t) , dt$</p>
+<h3 id="s-域-xrightarrow-int-s-infty-时域：-int-s-infty-F-s-ds-xrightarrow-frac-f-t-t"><a href="#s-域-xrightarrow-int-s-infty-时域：-int-s-infty-F-s-ds-xrightarrow-frac-f-t-t" class="headerlink" title="s 域 $\xrightarrow{\int_s^\infty}$ 时域：$\int_s^\infty F(s) , ds \xrightarrow{\frac{f(t)}{t}}$"></a>s 域 $\xrightarrow{\int_s^\infty}$ 时域：$\int_s^\infty F(s) , ds \xrightarrow{\frac{f(t)}{t}}$</h3><h2 id="4-时域平移：-f-t-t-0-xrightarrow-e-st-0-F-s"><a href="#4-时域平移：-f-t-t-0-xrightarrow-e-st-0-F-s" class="headerlink" title="4. 时域平移：$f(t - t_0) \xrightarrow{e^{-st_0} F(s)}$"></a>4. 时域平移：$f(t - t_0) \xrightarrow{e^{-st_0} F(s)}$</h2><h2 id="5-s-域平移：-F-s-s-0-xrightarrow-e-s-0-t-f-t"><a href="#5-s-域平移：-F-s-s-0-xrightarrow-e-s-0-t-f-t" class="headerlink" title="5. s 域平移：$F(s - s_0) \xrightarrow{e^{s_0 t} f(t)}$"></a>5. s 域平移：$F(s - s_0) \xrightarrow{e^{s_0 t} f(t)}$</h2><h2 id="6-尺度变换：-f-at-xrightarrow-frac-F-frac-s-a-a"><a href="#6-尺度变换：-f-at-xrightarrow-frac-F-frac-s-a-a" class="headerlink" title="6. 尺度变换：$f(at) \xrightarrow{\frac{F(\frac{s}{a})}{a}}$"></a>6. 尺度变换：$f(at) \xrightarrow{\frac{F(\frac{s}{a})}{a}}$</h2><h2 id="7-初值定理：-lim-t-to-0-f-t-lim-s-to-infty-F-s"><a href="#7-初值定理：-lim-t-to-0-f-t-lim-s-to-infty-F-s" class="headerlink" title="7. 初值定理：$\lim_{t \to 0} f(t) &#x3D; \lim_{s \to \infty} F(s)$"></a>7. 初值定理：$\lim_{t \to 0} f(t) &#x3D; \lim_{s \to \infty} F(s)$</h2><h2 id="8-终值定理：-lim-t-to-infty-f-t-lim-s-to-0-s-F-s"><a href="#8-终值定理：-lim-t-to-infty-f-t-lim-s-to-0-s-F-s" class="headerlink" title="8. 终值定理：$\lim_{t \to \infty} f(t) &#x3D; \lim_{s \to 0} s F(s)$"></a>8. 终值定理：$\lim_{t \to \infty} f(t) &#x3D; \lim_{s \to 0} s F(s)$</h2><h3 id="条件：-F-s-在虚轴以及其右侧是否一直解析，且在实轴以及上侧是否一直解析。"><a href="#条件：-F-s-在虚轴以及其右侧是否一直解析，且在实轴以及上侧是否一直解析。" class="headerlink" title="条件：$F(s)$ 在虚轴以及其右侧是否一直解析，且在实轴以及上侧是否一直解析。"></a>条件：$F(s)$ 在虚轴以及其右侧是否一直解析，且在实轴以及上侧是否一直解析。</h3><p>PS：初值和终值的物理意义：</p>
+<ul>
+<li>当频率为0时，说明是直流电路，可以得出电路稳定的终止；</li>
+<li>当频率为 $\infty$ 时，相当于接入信号的突变【高频分量】，可以得出相应的初值。</li>
+</ul>
+<p>应用意义：当电路较复杂时，可直接求出原函数的初值和终值。</p>
+<h2 id="9-卷积：-f-1-t-f-2-t-F-1-s-F-2-s"><a href="#9-卷积：-f-1-t-f-2-t-F-1-s-F-2-s" class="headerlink" title="9. 卷积：$f_1(t) * f_2(t) &#x3D; F_1(s) F_2(s)$"></a>9. 卷积：$f_1(t) * f_2(t) &#x3D; F_1(s) F_2(s)$</h2><h1 id="具体变换步骤："><a href="#具体变换步骤：" class="headerlink" title="具体变换步骤："></a>具体变换步骤：</h1><h2 id="总体思路："><a href="#总体思路：" class="headerlink" title="总体思路："></a>总体思路：</h2><p>把复杂的时域式子变为 $s$ 域式子，把 $s$ 域式子化成可用公式直接逆变换的形式。</p>
+<h2 id="具体情况："><a href="#具体情况：" class="headerlink" title="具体情况："></a>具体情况：</h2><h3 id="部分分式分解法："><a href="#部分分式分解法：" class="headerlink" title="部分分式分解法："></a>部分分式分解法：</h3><p>通式：$F(s) &#x3D; \frac{a_m s^m + a_{m-1} s^{m-1} + \cdots + a_0}{b_n s^n + b_{n-1} s^{n-1} + \cdots + b_0}$</p>
+<h4 id="1-n-m-："><a href="#1-n-m-：" class="headerlink" title="1. $n &gt; m$："></a>1. $n &gt; m$：</h4><p>转化成 $F(s) &#x3D; M \left[ \frac{K_1}{s - p_1} + \frac{K_2}{s - p_2} + \frac{K_3}{s - p_3} + \cdots \right]$<br>（其中 M 为提取的公因数系数）</p>
+<p><strong>K 的求法</strong>：<br>$$ F(s) &#x3D; M \frac{10 (s + 2)(s + 5)}{s (s + 1)(s + 3)} $$<br>$$ F(s) &#x3D; M \left[ \frac{K_1}{s} + \frac{K_2}{s + 1} + \frac{K_3}{s + 3} \right] $$</p>
+<p>$$ K_1 &#x3D; s \cdot \frac{10 (s + 2)(s + 5)}{s (s + 1)(s + 3)} \Big|_{s &#x3D; 0} &#x3D; \frac{10 \cdot 2 \cdot 5}{1 \cdot 3} $$</p>
+<p>$$ K_2 &#x3D; (s + 1) \cdot \frac{10 (s + 2)(s + 5)}{s (s + 1)(s + 3)} \Big|_{s &#x3D; -1} &#x3D; \frac{10 \cdot (-1 + 2) \cdot (-1 + 5)}{(-1) \cdot (-1 + 3)} $$</p>
+<p>$$ K_3 &#x3D; s \cdot \frac{10 (s + 2)(s + 5)}{s (s + 1)(s + 3)} \Big|_{s &#x3D; -3} &#x3D; \frac{10 \cdot (-3 + 2) \cdot (-3 + 5)}{-3 \cdot (-3 + 1)} $$</p>
+<h4 id="2-n-leq-m-："><a href="#2-n-leq-m-：" class="headerlink" title="2. $n \leq m$："></a>2. $n \leq m$：</h4><p>转化成 $F(s) &#x3D; A(s) + M \left[ \frac{K_1}{s - p_1} + \frac{K_2}{s - p_2} + \cdots \right]$<br>即用长除法把高次项拆分出去，即 $A(s)$，其余和上同。</p>
+<h4 id="3-有重根"><a href="#3-有重根" class="headerlink" title="3. 有重根"></a>3. 有重根</h4><p>【重根的 K 怎么求】：<br>$$ K_{1i} &#x3D; \frac{1}{(i-1)!} \frac{d^{i-1}}{ds^{i-1}} F_1(s) $$<br>其中：$F_1(s) &#x3D; (s - p_1)^k F(s)$。</p>
+<p>例如：<br>$$ F(s) &#x3D; \frac{K_{11}}{(s + 1)^3} + \frac{K_{12}}{(s + 1)^2} + \frac{K_{13}}{(s + 1)} $$</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">梁沛志</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/02/17/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2/">http://example.com/2025/02/17/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Tony</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/home/article1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/02/17/AI/%E3%80%90Python%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC%E3%80%91%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E7%9A%84%E8%87%AA%E5%8A%A8%E5%BD%92%E7%B1%BB/" title="【Python自动化脚本】实现文件的自动归类"><img class="cover" src="/img/home/article1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">【Python自动化脚本】实现文件的自动归类</div></div><div class="info-2"><div class="info-item-1">利用库函数：OS模块：获取文件的位置，文件夹的增删改查浏览- 如何浏览文件夹下的所有文件：file&#x3D;os.listpath(path)+for i in fileshutil 模块：文件的移动和处理【增删改查压缩】 核心：  任务拆解：如何移动文件以何种规则分类  如何处理不同文件的共性特征 split函数分割点   </div></div></div></a><a class="pagination-related" href="/2025/02/17/%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F/%E7%A6%BB%E6%95%A3%E6%97%B6%E9%97%B4%E7%B3%BB%E7%BB%9F/" title="离散时间系统"><img class="cover" src="/img/home/article1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">离散时间系统</div></div><div class="info-2"><div class="info-item-1"> title: 信号系统-离散时间系统date: 2024-12-08categories: 控制description: 信号系统理论笔记-离散时间系统来源： 连续系统抽样 数字信号  优缺点：优： 精度高，可靠性好 更适合多维变量的模型  缺： 当工作频率高时，数模转换的速度跟不上，这时用模拟信号更好  描述：线性时不变系统的差分方程模型1. 序列：离散的时间(1) 变化： 压缩：$k n$，例如 $2n$，则只保留原来的偶数项，原来的奇数项为0。 扩展：$\frac{k}{n}$，对于原来不存在的而扩展后多出的项给予0。  (2) 典型案例(1) 单位样值信号 $\delta(t)$只在 $t&#x3D;0$ 时为 $1$【而不是 $\infty$】。 (2) 单位跃变信号 $u(t)$在 $t&#x3D;0$ 时取 $1$【而不是连续中的 $t&#x3D;0$ 时不取值】。 (3) 单位矩阵信号 $R_N(n)$间距为 $0 \to N-1$。 PS：(1)(2)(3) 之间的转化关系见书p7。 (4) 斜变信号 $x(n) &#x3D; n u(n)$(5) 指数信号...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar/1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">梁沛志</div><div class="author-info-description">-【AI】【嵌入式】【控制】【机械】-  的学习，思考与实践</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Ebwai"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Ebwai" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:lpz2025apply@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F-%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2date-2024-12-08categories-%E6%8E%A7%E5%88%B6description-%E4%BF%A1%E5%8F%B7%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA%E7%AC%94%E8%AE%B0-%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%8F%98%E6%8D%A2"><span class="toc-number">1.</span> <span class="toc-text">title: 信号系统-拉普拉斯变换date: 2024-12-08categories: 控制description: 信号系统理论笔记-拉普拉斯变换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number"></span> <span class="toc-text">适用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%97%B6%E4%B8%8D%E5%8F%98%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%B8%B8%E7%B3%BB%E6%95%B0%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">线性时不变系统模型（常系数线性微分方程）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E6%8D%A2%E5%85%AC%E5%BC%8F"><span class="toc-number"></span> <span class="toc-text">变换公式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%A5%E6%BA%90%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">来源：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B6%E6%95%9B%E6%9D%A1%E4%BB%B6%EF%BC%9A%E4%B8%8D%E6%94%B6%E6%95%9B%E5%B0%B1%E4%B8%8D%E8%83%BD%E6%8B%89%E6%B0%8F%E5%8F%98%E6%8D%A2"><span class="toc-number">1.1.</span> <span class="toc-text">收敛条件：不收敛就不能拉氏变换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">公式：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%AD%A3%E5%8F%98%E6%8D%A2"><span class="toc-number">2.1.</span> <span class="toc-text">1. 正变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%86%E5%8F%98%E6%8D%A2"><span class="toc-number">2.2.</span> <span class="toc-text">2. 逆变换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B8%B8%E8%A7%81%E7%BB%93%E8%AE%BA%EF%BC%88%E5%8F%AA%E8%80%83%E8%99%91%E5%8D%95%E8%BE%B9%EF%BC%8C%E6%89%80%E4%BB%A5-t-0-%E6%97%B6%E4%B8%80%E5%BE%8B%E4%B8%BA0%EF%BC%8C%E5%AE%9A%E4%B9%89%E4%BB%8E0%E5%BC%80%E5%A7%8B%E3%80%90%E6%89%80%E4%BB%A5%E5%8C%85%E6%8B%AC%E4%BA%86%E8%B7%B3%E5%8F%98%E7%82%B9%E3%80%91%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3. 常见结论（只考虑单边，所以 $t &lt; 0$ 时一律为0，定义从0开始【所以包括了跳变点】）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E7%82%B9%EF%BC%9A%E3%80%90%E6%97%B6%E5%9F%9F%E7%9A%84%E8%BF%90%E7%AE%97%E5%8F%98%E5%BE%97%E7%AE%80%E5%8D%95%E3%80%91"><span class="toc-number"></span> <span class="toc-text">优点：【时域的运算变得简单】</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BA%BF%E6%80%A7%EF%BC%9A-K-1-f-1-t-K-2-f-2-t-xrightarrow-K-1-f-1-s-K-2-f-2-s"><span class="toc-number">1.</span> <span class="toc-text">1. 线性：$K_1 f_1(t) + K_2 f_2(t) \xrightarrow{K_1 f_1(s) + K_2 f_2(s)}$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%BE%AE%E5%88%86%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">2. 微分：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E5%9F%9F-xrightarrow-frac-d-dt-s-%E5%9F%9F%EF%BC%9A-frac-f-t-dt-xrightarrow-s-F-s-f-0"><span class="toc-number">2.1.</span> <span class="toc-text">时域 $\xrightarrow{\frac{d}{dt}}$ s 域：$\frac{f(t)}{dt} \xrightarrow{s F(s) - f(0)}$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s-%E5%9F%9F-xrightarrow-frac-d-ds-%E6%97%B6%E5%9F%9F%EF%BC%9A-frac-F-s-ds-xrightarrow-t-f-t"><span class="toc-number">2.2.</span> <span class="toc-text">s 域 $\xrightarrow{\frac{d}{ds}}$ 时域：$\frac{F(s)}{ds} \xrightarrow{-t f(t)}$</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A7%AF%E5%88%86%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">3. 积分：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E5%9F%9F-xrightarrow-int-infty-t-s-%E5%9F%9F%EF%BC%9A-int-infty-t-f-gamma-d-gamma-xrightarrow-frac-F-s-s-frac-f-1-0-s"><span class="toc-number">3.1.</span> <span class="toc-text">时域 $\xrightarrow{\int_{-\infty}^t}$ s 域：$\int_{-\infty}^t f(\gamma) d\gamma \xrightarrow{\frac{F(s)}{s} + \frac{f^{-1}(0)}{s}}$</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s-%E5%9F%9F-xrightarrow-int-s-infty-%E6%97%B6%E5%9F%9F%EF%BC%9A-int-s-infty-F-s-ds-xrightarrow-frac-f-t-t"><span class="toc-number">3.2.</span> <span class="toc-text">s 域 $\xrightarrow{\int_s^\infty}$ 时域：$\int_s^\infty F(s) , ds \xrightarrow{\frac{f(t)}{t}}$</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%97%B6%E5%9F%9F%E5%B9%B3%E7%A7%BB%EF%BC%9A-f-t-t-0-xrightarrow-e-st-0-F-s"><span class="toc-number">4.</span> <span class="toc-text">4. 时域平移：$f(t - t_0) \xrightarrow{e^{-st_0} F(s)}$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-s-%E5%9F%9F%E5%B9%B3%E7%A7%BB%EF%BC%9A-F-s-s-0-xrightarrow-e-s-0-t-f-t"><span class="toc-number">5.</span> <span class="toc-text">5. s 域平移：$F(s - s_0) \xrightarrow{e^{s_0 t} f(t)}$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%B0%BA%E5%BA%A6%E5%8F%98%E6%8D%A2%EF%BC%9A-f-at-xrightarrow-frac-F-frac-s-a-a"><span class="toc-number">6.</span> <span class="toc-text">6. 尺度变换：$f(at) \xrightarrow{\frac{F(\frac{s}{a})}{a}}$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%88%9D%E5%80%BC%E5%AE%9A%E7%90%86%EF%BC%9A-lim-t-to-0-f-t-lim-s-to-infty-F-s"><span class="toc-number">7.</span> <span class="toc-text">7. 初值定理：$\lim_{t \to 0} f(t) &#x3D; \lim_{s \to \infty} F(s)$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E7%BB%88%E5%80%BC%E5%AE%9A%E7%90%86%EF%BC%9A-lim-t-to-infty-f-t-lim-s-to-0-s-F-s"><span class="toc-number">8.</span> <span class="toc-text">8. 终值定理：$\lim_{t \to \infty} f(t) &#x3D; \lim_{s \to 0} s F(s)$</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%EF%BC%9A-F-s-%E5%9C%A8%E8%99%9A%E8%BD%B4%E4%BB%A5%E5%8F%8A%E5%85%B6%E5%8F%B3%E4%BE%A7%E6%98%AF%E5%90%A6%E4%B8%80%E7%9B%B4%E8%A7%A3%E6%9E%90%EF%BC%8C%E4%B8%94%E5%9C%A8%E5%AE%9E%E8%BD%B4%E4%BB%A5%E5%8F%8A%E4%B8%8A%E4%BE%A7%E6%98%AF%E5%90%A6%E4%B8%80%E7%9B%B4%E8%A7%A3%E6%9E%90%E3%80%82"><span class="toc-number">8.1.</span> <span class="toc-text">条件：$F(s)$ 在虚轴以及其右侧是否一直解析，且在实轴以及上侧是否一直解析。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E5%8D%B7%E7%A7%AF%EF%BC%9A-f-1-t-f-2-t-F-1-s-F-2-s"><span class="toc-number">9.</span> <span class="toc-text">9. 卷积：$f_1(t) * f_2(t) &#x3D; F_1(s) F_2(s)$</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%8F%98%E6%8D%A2%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number"></span> <span class="toc-text">具体变换步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">总体思路：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E6%83%85%E5%86%B5%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">具体情况：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E5%88%86%E5%88%86%E5%BC%8F%E5%88%86%E8%A7%A3%E6%B3%95%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">部分分式分解法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-n-m-%EF%BC%9A"><span class="toc-number">2.1.1.</span> <span class="toc-text">1. $n &gt; m$：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-n-leq-m-%EF%BC%9A"><span class="toc-number">2.1.2.</span> <span class="toc-text">2. $n \leq m$：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%9C%89%E9%87%8D%E6%A0%B9"><span class="toc-number">2.1.3.</span> <span class="toc-text">3. 有重根</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By 梁沛志</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:24%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(/img/home/categories1.png);"> <a class="categoryBar-list-link" href="categories/AI/">AI</a><span class="categoryBar-list-count">6</span><span class="categoryBar-list-descr">人工智能</span></li><li class="categoryBar-list-item" style="background:url(/img/home/categories2.png);"> <a class="categoryBar-list-link" href="categories/嵌入式/">嵌入式</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">嵌入式</span></li><li class="categoryBar-list-item" style="background:url(/img/home/categories3.png);"> <a class="categoryBar-list-link" href="categories/信号系统/">信号系统</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">控制</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><!-- hexo injector body_end end --></body></html>
