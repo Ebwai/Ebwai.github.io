@@ -21,3 +21,35 @@
 [data-theme="dark"] #page-header::before {
     background: transparent !important;
 }
+
+/* 本地微信图标：类名 fas fa-weixin-local（和 Font Awesome 格式统一） */
+.fas.fa-weixin-local {
+  /* 隐藏默认字体图标（避免无原生图标时显示空白） */
+  content: '';
+  display: inline-block;
+  width: 1.2em; /* 和现有社交图标（如 Github）大小一致 */
+  height: 1.2em;
+  background: url('/img/icons/weixin.svg') no-repeat center; /* 本地图标路径 */
+  background-size: contain; /* 自适应尺寸，不拉伸 */
+  vertical-align: middle; /* 垂直居中，避免和其他图标错位 */
+  color: #1AAD19; /* 微信官方色（如果 SVG 是透明底，此颜色生效） */
+}
+
+/* 本地哔哩哔哩图标：类名 fas fa-bilibili-local */
+.fas.fa-bilibili-local {
+  content: '';
+  display: inline-block;
+  width: 1.2em; /* 尺寸和微信、Github 对齐 */
+  height: 1.2em;
+  background: url('/img/icons/bilibili.svg') no-repeat center; /* 本地图标路径 */
+  background-size: contain;
+  vertical-align: middle;
+  color: #FB7299; /* B站官方色（透明底 SVG 生效） */
+}
+
+/* 可选：hover 效果（和其他社交图标保持一致，鼠标悬浮时变暗） */
+.fas.fa-weixin-local:hover,
+.fas.fa-bilibili-local:hover {
+  opacity: 0.8; /* 悬浮透明度降低，增强交互感 */
+  transition: opacity 0.3s; /* 过渡动画，更丝滑 */
+}
